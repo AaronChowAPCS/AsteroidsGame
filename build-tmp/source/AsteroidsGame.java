@@ -1,3 +1,19 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class AsteroidsGame extends PApplet {
+
 //Aaron Chow
 /* @pjs preload="ShipVersion4.png"; */
 
@@ -167,9 +183,9 @@ public void draw()
 
   //Causes scapeship to accelerate and deccelerate
   if(accelerating)
-    apollo.accelerate(.05);
+    apollo.accelerate(.05f);
   if(deccelerating)
-    apollo.accelerate(-.05);
+    apollo.accelerate(-.05f);
   if(clockWise)
     apollo.spin(-10);
   if(counterClockWise)
@@ -212,9 +228,9 @@ public void draw()
     text("Press R to respawn!", 250, 300);
     //Causes scapeship to accelerate and deccelerate
     if(accelerating)
-      apollo.accelerate(.05);
+      apollo.accelerate(.05f);
     if(deccelerating)
-      apollo.accelerate(-.05);
+      apollo.accelerate(-.05f);
     if(clockWise)
       apollo.spin(-10);
     if(counterClockWise)
@@ -257,7 +273,7 @@ public void keyPressed()
   if(key == 'o')
     gameOver = true;
 }
-void keyReleased()
+public void keyReleased()
 {
   if(key == 'w'){
     accelerating = false;
@@ -368,7 +384,7 @@ class Star
   private int starCenterY;
   public Star()
   {
-    shrinkValue = .05;
+    shrinkValue = .05f;
     starOpacity = ((int)(Math.random()*255));
     starCenterX = ((int)(Math.random()*500));
     starCenterY = ((int)(Math.random()*500));
@@ -447,14 +463,14 @@ class Asteroid extends Floater
     myDirectionY = ((int)(Math.random()*5)) - 2;
     if(myDirectionX == 0)
     {
-      if(Math.random() < .5)
+      if(Math.random() < .5f)
         myDirectionX--;
       else
         myDirectionX++;
     }
     if(myDirectionY == 0)
     {
-      if(Math.random() < .5)
+      if(Math.random() < .5f)
         myDirectionY--;
       else
         myDirectionY++;
@@ -588,3 +604,12 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "AsteroidsGame" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
